@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
           alignment: Alignment.center,
           children: [
             Image.asset(
-              'assets/img/background_shoop.jpg',
+              'assets/img/background_shop.jpg',
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               fit: BoxFit.cover,
@@ -25,11 +25,12 @@ class _LoginPageState extends State<LoginPage> {
               colorBlendMode: BlendMode.darken,
             ),
             Container(
-              width: MediaQuery.of(context).size.width * 0.85,
-              height: MediaQuery.of(context).size.height * 0.75,
+              width: MediaQuery.of(context).size.width * 0.80,
+              height: MediaQuery.of(context).size.height * 0.70,
               decoration: BoxDecoration(
-                  color: Color.fromRGBO(232, 226, 226, 0.4),
-                  borderRadius: BorderRadius.all(Radius.circular(25))),
+                color: Color.fromRGBO(232, 226, 226, 0.4),
+                borderRadius: BorderRadius.all(Radius.circular(25))
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,31 +38,38 @@ class _LoginPageState extends State<LoginPage> {
                   Icon(
                     Icons.person,
                     color: Colors.white,
-                    size: 125,
+                    size: 130,
                   ),
                   Text(
-                    'Login',
+                      'LOGIN',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25,right: 25,bottom: 15),
                     child: TextField(
                       decoration: InputDecoration(
-                          label: Text(
+                        label: Text(
                             'Email',
-                            style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: Colors.white
                           ),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: Colors.white,
-                          )),
+                        ),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)
+                        ),
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: Colors.white,
+                        )
+                      ),
+
                     ),
                   ),
                   Container(
@@ -70,37 +78,46 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                           label: Text(
                             'Password',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                                color: Colors.white
+                            ),
                           ),
                           enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
+                              borderSide: BorderSide(color: Colors.white)
+                          ),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)),
+                              borderSide: BorderSide(color: Colors.white)
+                          ),
                           prefixIcon: Icon(
                             Icons.lock,
                             color: Colors.white,
-                          )),
+                          )
+                      ),
+
                     ),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(left: 25, right: 25, top: 20,bottom: 10),
+                    margin: EdgeInsets.only(left: 25,right: 25,bottom: 15),
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text(
-                          'LOG IN',
-                        style: TextStyle(
-                          fontSize: 17
+                        onPressed: (){},
+                        child: Text(
+                            'LOG IN',
+                          style: TextStyle(
+                            fontSize: 15,
+
+                          ),
+
                         ),
-                      ),
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                          foregroundColor: Colors.black),
+                        backgroundColor: Colors.green,
+                        foregroundColor: Colors.black
+                      ),
                     ),
                   ),
                   Text(
-                      'Do you have not account ?',
+                      'You do not have account?',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 17
@@ -108,25 +125,30 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.only(left: 25, right: 25, top: 20,bottom: 10),
+                    margin: EdgeInsets.only(left: 25,right: 25,top: 15),
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: (){},
                       child: Text(
                         'REGISTER',
                         style: TextStyle(
-                            fontSize: 17
+                          fontSize: 15,
+
                         ),
+
                       ),
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
-                          foregroundColor: Colors.white),
+                          foregroundColor: Colors.white
+                      ),
                     ),
                   )
+
                 ],
               ),
-            ),
+            )
           ],
+
         ),
       ),
     );
