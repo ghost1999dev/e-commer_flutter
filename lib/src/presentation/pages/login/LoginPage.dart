@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:untitled/src/presentation/pages/widgets/DefaultTextField.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -16,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Stack(
           alignment: Alignment.center,
           children: [
+
             Image.asset(
               'assets/img/background_shop.jpg',
               width: MediaQuery.of(context).size.width,
@@ -24,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.black54,
               colorBlendMode: BlendMode.darken,
             ),
+
             Container(
               width: MediaQuery.of(context).size.width * 0.80,
               height: MediaQuery.of(context).size.height * 0.70,
@@ -50,50 +53,26 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25,right: 25,bottom: 15),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        label: Text(
-                            'Email',
-                          style: TextStyle(
-                            color: Colors.white
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
-                        ),
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Colors.white,
-                        )
-                      ),
-
+                    child: DefaultTextField(
+                        label: 'Email',
+                        isNumber:false,
+                        obscureText: false,
+                        icon: Icons.email,
+                        onChange: (value){
+                          print(value);
+                        }
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25,right: 25,bottom: 15),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          label: Text(
-                            'Password',
-                            style: TextStyle(
-                                color: Colors.white
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)
-                          ),
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: Colors.white,
-                          )
-                      ),
-
+                    child: DefaultTextField(
+                        label: 'Password',
+                        isNumber:false,
+                        icon: Icons.lock,
+                        obscureText: true,
+                        onChange: (value){
+                          print(value);
+                        }
                     ),
                   ),
                   Container(
@@ -128,7 +107,9 @@ class _LoginPageState extends State<LoginPage> {
                     margin: EdgeInsets.only(left: 25,right: 25,top: 15),
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Navigator.pushNamed(context, 'register');
+                      },
                       child: Text(
                         'REGISTER',
                         style: TextStyle(
