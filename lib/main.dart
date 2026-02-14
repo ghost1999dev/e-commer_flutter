@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:untitled/src/presentation/pages/login/LoginPage.dart';
+<<<<<<< HEAD
 import 'package:untitled/src/presentation/pages/register/RegisterPage.dart';
+=======
+import 'package:untitled/src/presentation/pages/register/RgisterPage.dart';
+>>>>>>> 24ba65c0736049fe3d494397be34f49deff5d86a
 
 
 void main() {
