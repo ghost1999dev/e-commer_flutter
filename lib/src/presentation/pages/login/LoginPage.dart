@@ -1,5 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:untitled/src/presentation/widgets/DefaultButton.dart';
+import 'package:untitled/src/presentation/widgets/DefaultTextField.dart';
+
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -50,50 +54,25 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25,right: 25,bottom: 15),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        label: Text(
-                            'Email',
-                          style: TextStyle(
-                            color: Colors.white
-                          ),
-                        ),
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white)
-                        ),
-                        prefixIcon: Icon(
-                          Icons.email,
-                          color: Colors.white,
-                        )
-                      ),
+                    child: DefaultTextField(
+                        label: 'Email',
+                        icon: Icons.email,
+                        onChange: (value){
 
+                        },
+                        obscureText: false,
+                        isNumber: false
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 25,right: 25,bottom: 15),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          label: Text(
-                            'Password',
-                            style: TextStyle(
-                                color: Colors.white
-                            ),
-                          ),
-                          enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)
-                          ),
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.white)
-                          ),
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: Colors.white,
-                          )
-                      ),
-
+                    child: DefaultTextField(
+                        label: 'Password',
+                        icon: Icons.lock,
+                        onChange: (value){
+                        },
+                        obscureText: true,
+                        isNumber: false
                     ),
                   ),
                   Container(
@@ -127,20 +106,13 @@ class _LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width,
                     margin: EdgeInsets.only(left: 25,right: 25,top: 15),
                     height: 50,
-                    child: ElevatedButton(
-                      onPressed: (){},
-                      child: Text(
-                        'REGISTER',
-                        style: TextStyle(
-                          fontSize: 15,
-
-                        ),
-
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white
-                      ),
+                    child: DefaultButton(
+                        text: 'REGISTER',
+                        onPressed: (){
+                          Navigator.pushNamed(context, 'register');
+                        },
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white
                     ),
                   )
 
