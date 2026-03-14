@@ -136,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: DefaultButton(
                         text: 'REGISTER',
                         onPressed: (){
-                          _loginBlocCubit?.getInformation();
+                          Navigator.pushNamed(context, 'register');
                         },
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white

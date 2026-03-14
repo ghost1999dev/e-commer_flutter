@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:untitled/src/presentation/pages/register/RegisterBlocCubit.dart';
 import 'package:untitled/src/presentation/pages/widgets/DefaultButton.dart';
 import 'package:untitled/src/presentation/pages/widgets/DefaultTextField.dart';
 class RegisterPage extends StatefulWidget {
@@ -9,8 +12,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+
+  RegisterBlocCubit? _registerBlocCubit;
   @override
   Widget build(BuildContext context) {
+    _registerBlocCubit = BlocProvider.of<RegisterBlocCubit>(context,listen: false);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -53,87 +59,128 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-                      child: DefaultTextField(
-                          label: 'Name',
-                          isNumber:false,
-                          icon: Icons.person,
-                          onChange: (value){
-                            print(value);
-                          },
-                          obscureText: false
+                      child: StreamBuilder(
+                        stream: _registerBlocCubit?.nameStream,
+                        builder: (context, snapshot) {
+                          return DefaultTextField(
+                              label: 'Name',
+                              isNumber:false,
+                              icon: Icons.person,
+                              onChange: (value){
+                                _registerBlocCubit?.changeName(value);
+                              },
+                              obscureText: false
+                          );
+                        }
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-                      child: DefaultTextField(
-                          label: 'Last name',
-                          isNumber:false,
-                          icon: Icons.person,
-                          onChange: (value){
-                            print(value);
-                          },
-                          obscureText: false
+                      child: StreamBuilder(
+                        stream: _registerBlocCubit?.lastnameStream,
+                        builder: (context, snapshot) {
+                          return DefaultTextField(
+                              label: 'Last name',
+                              isNumber:false,
+                              icon: Icons.person,
+                              onChange: (value){
+                                _registerBlocCubit?.changeLastName(value);
+                              },
+                              obscureText: false
+                          );
+                        }
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-                      child: DefaultTextField(
-                          label: 'Email',
-                          isNumber: false,
-                          icon: Icons.email,
-                          onChange: (value){
-                            print(value);
-                          },
-                          obscureText: false
+                      child: StreamBuilder(
+                        stream: _registerBlocCubit?.emailStream,
+                        builder: (context, snapshot) {
+                          return DefaultTextField(
+                              label: 'Email',
+                              isNumber: false,
+                              icon: Icons.email,
+                              onChange: (value){
+                                _registerBlocCubit?.changeEmail(value);
+                              },
+                              obscureText: false
+                          );
+                        }
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-                      child: DefaultTextField(
-                          label: 'Phone',
-                          isNumber:true,
-                          icon: Icons.phone,
-                          onChange: (value){
-                            print(value);
-                          },
-                          obscureText: false
+                      child: StreamBuilder(
+                        stream: _registerBlocCubit?.phoneStream,
+                        builder: (context, snapshot) {
+                          return DefaultTextField(
+                              label: 'Phone',
+                              isNumber:true,
+                              icon: Icons.phone,
+                              onChange: (value){
+                                _registerBlocCubit?.changePhone(value);
+                              },
+                              obscureText: false
+                          );
+                        }
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-                      child: DefaultTextField(
-                          label: 'Password',
-                          isNumber:false,
-                          icon: Icons.lock,
-                          onChange: (value){
-                            print(value);
-                          },
-                          obscureText: true
+                      child: StreamBuilder(
+                        stream: _registerBlocCubit?.passwordControllerStream,
+                        builder: (context, snapshot) {
+                          return DefaultTextField(
+                              label: 'Password',
+                              isNumber:false,
+                              icon: Icons.lock,
+                              onChange: (value){
+                                _registerBlocCubit?.changePassword(value);
+                              },
+                              obscureText: true
+                          );
+                        }
                       ),
                     ),
                     Container(
                       margin: EdgeInsets.only(left: 25,right: 25,bottom: 10),
-                      child: DefaultTextField(
-                          label: 'Confirm password',
-                          isNumber:false,
-                          icon: Icons.lock_outline,
-                          onChange: (value){
-                            print(value);
-                          },
-                          obscureText: true
+                      child: StreamBuilder(
+                        stream: _registerBlocCubit?.confirmPasswordStream,
+                        builder: (context, snapshot) {
+                          return DefaultTextField(
+                              label: 'Confirm password',
+                              isNumber:false,
+                              icon: Icons.lock_outline,
+                              onChange: (value){
+                                _registerBlocCubit?.changeConfirmPassword(value);
+                              },
+                              obscureText: true
+                          );
+                        }
                       ),
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.only(left: 25,right: 25,top: 15),
                       height: 50,
-                      child: DefaultButton(
-                          text: 'REGISTER',
-                          onPressed: (){
+                      child: StreamBuilder<Object>(
+                        stream: _registerBlocCubit?.validateForm,
+                        builder: (context, snapshot) {
+                          return DefaultButton(
+                              text: 'REGISTER',
+                              onPressed: (){
+                                if(snapshot.hasData){
+                                  _registerBlocCubit?.getImformation();
+                                }else{
+                                  Fluttertoast.showToast(msg:
+                                  'This form is not available');
+                                }
 
-                          },
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white
+                              },
+                              backgroundColor: Colors.black,
+                              foregroundColor: Colors.white
+                          );
+                        }
                       ),
                     ),
 
