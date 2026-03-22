@@ -19,6 +19,7 @@ class LoginBlocCubit extends Cubit<LoginBloc>{
     }
 
   }
+  
 
   void changePassword(String password){
     if(password.length < 6){

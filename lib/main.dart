@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/src/blocProviders.dart';
-import 'package:untitled/src/presentation/pages/login/LoginBlocCubit.dart';
 import 'package:untitled/src/presentation/pages/login/LoginPage.dart';
 
 import 'package:untitled/src/presentation/pages/register/RgisterPage.dart';
