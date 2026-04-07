@@ -1,15 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:untitled/src/data/remote/service/AuthService.dart';
+import 'package:untitled/src/domain/utils/Resource.dart';
 import 'package:untitled/src/presentation/pages/login/LoginBloc.dart';
 
 class LoginBlocCubit extends Cubit<LoginBloc>{
   LoginBlocCubit(): super(LoginInitial());
+  Authservice authservice= Authservice();
 
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
+  final _responseController = BehaviorSubject<Resource>();
 
   Stream<String> get emailStream => _emailController.stream;
   Stream<String> get passwordStream => _passwordController.stream;
+  Stream<Resource> get responseStream => _responseController.stream;
 
   void changeEmail(String email){
     if(email.length<3){
@@ -34,9 +39,10 @@ class LoginBlocCubit extends Cubit<LoginBloc>{
   Stream<bool> get validateForm => Rx.combineLatest2(
       emailStream, passwordStream,(a,b)=>true);
 
-  void getInformation(){
-    print('Email ${_emailController.value}');
-    print('Password ${_passwordController.value}');
+  void getInformation()async{
+    _responseController.add(Loading());
+    Resource authResponse=  await authservice.login(_emailController.value, _passwordController.value);
+    _responseController.add(authResponse);
   }
 
 
