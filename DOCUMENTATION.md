@@ -52,3 +52,41 @@ Clase que gestiona el estado y la validación del formulario de login.
 - Código más limpio y fácil de mantener.
 
 ---
+
+## Insumos de la Petición Login (Host + Request)
+
+### Host (Base URL)
+
+https://api-ecommerce-5aby.onrender.com
+
+### Endpoint
+
+/auth/login
+
+### URL completa
+
+https://api-ecommerce-5aby.onrender.com/auth/login
+
+### Método HTTP
+
+POST
+
+### Headers
+
+- Content-Type: application/json
+
+### Request Body Test (JSON)
+
+```json
+{
+    "email":"fernandotest3d@gmail.com",
+    "password":"123456"
+}
+```
+
+### Respuesta esperada
+
+- 200 o 201: Login exitoso.
+- 4xx o 5xx: Error de autenticación o error del servidor.
+
+---
