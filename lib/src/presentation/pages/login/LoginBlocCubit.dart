@@ -1,12 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:untitled/src/data/remote/service/AuthService.dart';
+import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
+import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
 import 'package:untitled/src/presentation/pages/login/LoginBloc.dart';
 
 class LoginBlocCubit extends Cubit<LoginBloc>{
   LoginBlocCubit(): super(LoginInitial());
-  Authservice authservice= Authservice();
+  LoginAuthUseCase loginAuthUseCase = LoginAuthUseCase();
 
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
@@ -41,7 +42,7 @@ class LoginBlocCubit extends Cubit<LoginBloc>{
 
   void getInformation()async{
     _responseController.add(Loading());
-    Resource authResponse=  await authservice.login(_emailController.value, _passwordController.value);
+    Resource authResponse=  await loginAuthUseCase.run(_emailController.value, _passwordController.value);
     _responseController.add(authResponse);
   }
 
