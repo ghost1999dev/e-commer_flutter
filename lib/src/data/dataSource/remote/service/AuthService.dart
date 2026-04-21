@@ -1,9 +1,9 @@
 import 'dart:convert';
+
 import 'package:untitled/src/data/api/ApiConfig.dart';
 import 'package:untitled/src/domain/models/AuthResponse.dart';
 import 'package:http/http.dart' as http;
 import 'package:untitled/src/domain/utils/Resource.dart';
-
 class Authservice {
   Future<Resource> login(String email,String password)async{
     try {
