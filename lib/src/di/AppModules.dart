@@ -1,0 +1,18 @@
+import 'package:untitled/src/data/dataSource/remote/repository/AuthRepositoryImpl.dart';
+import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
+import 'package:untitled/src/domain/repository/AuthRepository.dart';
+import 'package:injectable/injectable.dart';
+import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
+import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
+@module
+abstract class AppModule{
+  @injectable
+  Authservice get authService => Authservice();
+  @injectable
+  AuthRepository get authRepository => AuthRepositoryImpl(authService);
+
+  @injectable
+  AuthUsesCases get authUsesCases => AuthUsesCases(
+    login: LoginAuthUseCase(authRepository)
+  );
+}

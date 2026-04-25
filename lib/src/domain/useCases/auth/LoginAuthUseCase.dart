@@ -1,10 +1,11 @@
 import 'package:untitled/src/data/dataSource/remote/repository/AuthRepositoryImpl.dart';
+import 'package:untitled/src/domain/repository/AuthRepository.dart';
 
 class LoginAuthUseCase {
 
-  AuthRepositoryImpl authRepositoryImpl = AuthRepositoryImpl();
-  //Realizar un disparador para lanze una funcion
+  AuthRepository repository;
+  LoginAuthUseCase(this.repository);
 
-  run(String email, String password)=> authRepositoryImpl.login(email, password);
+  run(String email, String password)=> repository.login(email, password);
   
 }
