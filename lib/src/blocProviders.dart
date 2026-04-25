@@ -7,5 +7,5 @@ import 'package:untitled/src/presentation/pages/register/RegisterBlocCubit.dart'
 
 List<BlocProvider> blocProviders=[
   BlocProvider<LoginBlocCubit>(create: (context)=>LoginBlocCubit(locator<AuthUsesCases>())),
-  BlocProvider<RegisterBlocCubit>(create: (context)=> RegisterBlocCubit())
+  BlocProvider<RegisterBlocCubit>(create: (context)=> RegisterBlocCubit(locator<AuthUsesCases>()))
 ];

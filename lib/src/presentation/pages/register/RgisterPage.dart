@@ -157,7 +157,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: 'REGISTER',
                                 onPressed: () {
                                   if (snapshot.hasData) {
-                                    _registerBlocCubit?.getImformation();
+                                    _registerBlocCubit?.register();
                                   } else {
                                     Fluttertoast.showToast(
                                         msg: 'This form is not available');

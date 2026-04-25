@@ -1,11 +1,13 @@
 import 'dart:convert';
+import 'dart:nativewrappers/_internal/vm/lib/ffi_native_finalizer_patch.dart';
 
 import 'package:untitled/src/data/api/ApiConfig.dart';
 import 'package:untitled/src/domain/models/AuthResponse.dart';
 import 'package:http/http.dart' as http;
+import 'package:untitled/src/domain/models/User.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
 class Authservice {
-  Future<Resource> login(String email,String password)async{
+  Future<Resource<AuthResponse>> login(String email,String password)async{
     try {
       Uri url = Uri.parse("${ApiConfig.API_COMMERCE}/auth/login");
       Map<String,String> headers = {
@@ -32,6 +34,30 @@ class Authservice {
       
     } catch (e) {
       return Error(e.toString());
+    }
+  }
+
+  Future<Resource<AuthResponse>> register(User user)async{
+    try {
+      Uri url = Uri.parse("${ApiConfig.API_COMMERCE}/auth/register");
+      Map<String,String> headers ={
+        'Content-Type':"application/json"
+      };
+      final response = await http.post(
+        url,
+        headers: headers,
+        body: user
+      );
+      final  data = json.decode(response.body);
+      if(response.statusCode ==20 || response.statusCode ==201){
+        AuthResponse authResponse = AuthResponse.fromJson(data);
+        return Success(data);
+      }else{
+        return Error(data['message']);
+      }
+    } catch (e) {
+      return Error(e.toString());
+      
     }
   }
 }

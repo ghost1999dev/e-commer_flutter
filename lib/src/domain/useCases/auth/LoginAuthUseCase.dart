@@ -1,5 +1,3 @@
-import 'package:injectable/injectable.dart';
-import 'package:untitled/src/data/dataSource/remote/repository/AuthRepositoryImpl.dart';
 import 'package:untitled/src/domain/repository/AuthRepository.dart';
 
 class LoginAuthUseCase {

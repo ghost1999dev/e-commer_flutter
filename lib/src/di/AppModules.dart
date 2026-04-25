@@ -4,6 +4,7 @@ import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
 import 'package:untitled/src/domain/repository/AuthRepository.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
+import 'package:untitled/src/domain/useCases/auth/RegisterUsesCases.dart';
 @module
 abstract class AppModule {
   @injectable
@@ -14,7 +15,8 @@ abstract class AppModule {
   
   @injectable
   AuthUsesCases get authUseCases => AuthUsesCases(
-    login: LoginAuthUseCase(authRepository)
+    login: LoginAuthUseCase(authRepository),
+    register: RegisterUsesCases(authRepository)
   );
   
 }
