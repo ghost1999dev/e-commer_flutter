@@ -1,5 +1,6 @@
 import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
 import 'package:untitled/src/domain/models/AuthResponse.dart';
+import 'package:untitled/src/domain/models/CreateUserResponse.dart';
 import 'package:untitled/src/domain/models/User.dart';
 import 'package:untitled/src/domain/repository/AuthRepository.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
@@ -13,7 +14,7 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Resource<AuthResponse>> register(User user) {
+  Future<Resource<CreateUserResponse>> register(User user) {
     // TODO: implement register
     return authservice.register(user);
   } 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:untitled/src/domain/utils/Resource.dart';
 import 'package:untitled/src/presentation/pages/register/RegisterBlocCubit.dart';
 import 'package:untitled/src/presentation/pages/widgets/DefaultButton.dart';
 import 'package:untitled/src/presentation/pages/widgets/DefaultTextField.dart';
@@ -73,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     Container(
                       margin: EdgeInsets.only(left: 25, right: 25, bottom: 10),
                       child: StreamBuilder(
-                          stream: _registerBlocCubit?.lastnameStream,
+                          stream: _registerBlocCubit?.lastNameStream,
                           builder: (context, snapshot) {
                             return DefaultTextField(
                                 label: 'Last name',
@@ -183,6 +184,30 @@ class _RegisterPageState extends State<RegisterPage> {
                     size: 35,
                     color: Colors.white,
                   )),
+            ),
+            StreamBuilder(
+              stream: _registerBlocCubit?.responseStream,
+              builder: (context,snapshot){
+                final state = snapshot.data;
+                print(state);
+                if(state is Loading){
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+
+                }
+                if(state is Error){
+                  Fluttertoast.showToast(msg: state.message);
+                  print("ERROR ${state.message}");
+                }
+                else if(state is Success){
+                  Fluttertoast.showToast(
+                    msg: "Login exitoso"
+                  );
+                }
+                return Container();
+
+              },
             )
           ],
         ),

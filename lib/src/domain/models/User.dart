@@ -14,7 +14,7 @@ class User {
   String email;
   int? id;
   dynamic?image;
-  String lastName;
+  String lastname;
   String?password;
   String name;
   dynamic? notificationToken;
@@ -25,7 +25,7 @@ class User {
     required this.email,
     this.id,
     this.image,
-    required this.lastName,
+    required this.lastname,
     this.password,
     required this.name,
     this.notificationToken,
@@ -37,7 +37,7 @@ class User {
         email: json["email"],
         id: json["id"] ?? 0,
         image: json["image"] ?? "",
-        lastName: json["lastName"],
+        lastname: json["lastName"],
         password: json["password"] ?? "",
         name: json["name"],
         notificationToken: json["notification_token"] ?? "",
@@ -49,8 +49,9 @@ class User {
         "email": email,
         "id": id,
         "image": image,
-        "lastName": lastName,
+        "lastname": lastname,
         "name": name,
+        "password": password,
         "notification_token": notificationToken,
         "phone": phone,
         "roles": roles !=null ? List<dynamic>.from(roles!.map((x) => x.toJson())): [],

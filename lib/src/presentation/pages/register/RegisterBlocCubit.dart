@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:untitled/src/domain/models/AuthResponse.dart';
+import 'package:untitled/src/domain/models/CreateUserResponse.dart';
 import 'package:untitled/src/domain/models/User.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
@@ -11,7 +12,7 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState>{
   RegisterBlocCubit(this.authUsesCases): super(RegisterInitial());
 
   final _nameController = BehaviorSubject<String>();
-  final _lastnameController = BehaviorSubject<String>();
+  final _lastNameController = BehaviorSubject<String>();
   final _emailController = BehaviorSubject<String>();
   final _phoneController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
@@ -19,7 +20,7 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState>{
   final _responseController = BehaviorSubject<Resource>();
 
   Stream<String> get nameStream => _nameController.stream;
-  Stream<String> get lastnameStream => _lastnameController.stream;
+  Stream<String> get lastNameStream => _lastNameController.stream;
   Stream<String> get emailStream => _emailController.stream;
   Stream<String> get phoneStream => _phoneController.stream;
   Stream<String> get passwordControllerStream => _passwordController;
@@ -28,7 +29,7 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState>{
 
   Stream<bool> get validateForm => Rx.combineLatest6(
       nameStream,
-      lastnameStream,
+      lastNameStream,
       emailStream,
       phoneStream,
       passwordControllerStream,
@@ -47,9 +48,9 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState>{
 
   void changeLastName(String lastName){
     if(lastName.length <2){
-      _lastnameController.sink.addError('The lastname is not longer');
+      _lastNameController.sink.addError('The lastname is not longer');
     }else{
-      _lastnameController.sink.add(lastName);
+      _lastNameController.sink.add(lastName);
     }
   }
 
@@ -93,15 +94,17 @@ class RegisterBlocCubit extends Cubit<RegisterBlocState>{
   }
 
   void register()async{
+    print("RESULT PASSWORD ${_passwordController.value}");
     _responseController.add(Loading());
     User user = User(
       name: _nameController.value,
-      lastName: _lastnameController.value,
+      lastname: _lastNameController.value,
       email: _emailController.value,
       phone: _phoneController.value,
       password: _passwordController.value
     );
-    Resource<AuthResponse> response = await authUsesCases.register.run(user);
+    print(user.toJson());
+    Resource<CreateUserResponse> response = await authUsesCases.register.run(user);
     _responseController.add(response);
   }
 
