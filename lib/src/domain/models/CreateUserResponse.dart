@@ -6,9 +6,9 @@ class CreateUserResponse {
   String email;
   String name;
   int id;
-  dynamic image;
+  String? image;
   String lastName;
-  dynamic notificationToken;
+  String? notificationToken;
   String phone;
   List<Role> roles;
 
@@ -18,8 +18,8 @@ class CreateUserResponse {
     required this.name,
     required this.id,
     required this.lastName,
-    required this.image,
-    required this.notificationToken,
+    this.image,
+    this.notificationToken,
     required this.phone,
     required this.roles
   });

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:untitled/src/domain/utils/Resource.dart';
 import 'package:untitled/src/presentation/pages/register/RegisterBlocCubit.dart';
 import 'package:untitled/src/presentation/pages/widgets/DefaultButton.dart';
 import 'package:untitled/src/presentation/pages/widgets/DefaultTextField.dart';
@@ -157,7 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 text: 'REGISTER',
                                 onPressed: () {
                                   if (snapshot.hasData) {
-                                    _registerBlocCubit?.getImformation();
+                                    _registerBlocCubit?.register();
                                   } else {
                                     Fluttertoast.showToast(
                                         msg: 'This form is not available');
@@ -183,6 +184,27 @@ class _RegisterPageState extends State<RegisterPage> {
                     size: 35,
                     color: Colors.white,
                   )),
+            ),
+            StreamBuilder(
+              stream: _registerBlocCubit?.responseStream,
+              builder: (context,snapshot){
+                final state = snapshot.data;
+                if(state is Loading){
+                  return Center(
+                     child: CircularProgressIndicator(),
+                  );
+                }
+                if(state is Error){
+                  Fluttertoast.showToast(
+                    msg: state.message
+                  );
+                }else if(state is Success){
+                  Fluttertoast.showToast(
+                    msg: "Registro exitoso"
+                  );
+                }
+                return Container();
+              },
             )
           ],
         ),
