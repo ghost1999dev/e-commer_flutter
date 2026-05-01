@@ -1,14 +1,54 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
-import 'package:untitled/src/presentation/pages/login/LoginBloc.dart';
+import 'package:untitled/src/presentation/pages/login/bloc/LoginEvent.dart';
+import 'package:untitled/src/presentation/pages/login/bloc/LoginState.dart';
+import 'package:untitled/src/presentation/utils/BlocFormItem.dart';
 
-class LoginBlocCubit extends Cubit<LoginBloc>{
+class LoginBloc extends Bloc<LoginEvent,LoginState>{
   AuthUsesCases authUsesCases;
-  LoginBlocCubit(this.authUsesCases): super(LoginInitial());
+  LoginBloc(this.authUsesCases): super(LoginState()){
+    on<InitEvent>(_onInitEvent);
+    on<EmailChanged>(_onEmailChanged);
+    on<PasswordChanged>(_onPasswordChanged);
+    on<LoginSubmit>(_onLoginSubmit);
+  }
+
+  final formKey = GlobalKey<FormState>();
+
+  Future<void> _onInitEvent(InitEvent event, Emitter<LoginState> emit)async{
+    emit(state.copyWidth(formKey: formKey));
+  }
+  Future<void> _onEmailChanged(EmailChanged event, Emitter<LoginState> emit)async{
+    emit(state.copyWidth(
+      email: BlocFormItem(value:event.email.value),
+      formKey: formKey
+    ));
+
+  }
+  Future<void>_onPasswordChanged(PasswordChanged event, Emitter<LoginState> emit)async{
+    emit(state.copyWidth(
+      password: BlocFormItem(value: event.password.value),
+      formKey: formKey
+    ));
+  }
+  Future<void> _onLoginSubmit(LoginSubmit event, Emitter<LoginState> emit)async{
+    emit(state.copyWidth(response: Loading(),formKey: formKey));
+    Resource authResponse=  await authUsesCases.login.run(
+      state.email.value,
+      state.password.value
+    );
+    emit(state.copyWidth(
+      response: authResponse,
+      formKey: formKey
+    ));
+
+  }
+
   
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
@@ -18,6 +58,7 @@ class LoginBlocCubit extends Cubit<LoginBloc>{
   Stream<String> get passwordStream => _passwordController.stream;
   Stream<Resource> get responseStream => _responseController.stream;
 
+
   void changeEmail(String email){
     if(email.length<3){
       _emailController.sink.addError('The email must be at least 6 characters');
@@ -26,7 +67,6 @@ class LoginBlocCubit extends Cubit<LoginBloc>{
     }
 
   }
-  
 
   void changePassword(String password){
     if(password.length < 6){
