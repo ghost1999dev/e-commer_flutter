@@ -8,13 +8,13 @@ class DefaultTextField extends StatelessWidget {
   bool isNumber;
 
    DefaultTextField({
-    super.key,
+    Key? key,
     required this.label,
     required this.icon,
     required this.onChange,
     required this.obscureText,
     required this.isNumber
-  });
+  }):super(key: key);
 
   @override
   Widget build(BuildContext context) {
