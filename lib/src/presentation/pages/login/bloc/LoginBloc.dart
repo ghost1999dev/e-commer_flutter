@@ -16,6 +16,7 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<LoginSubmit>(_onLoginSubmit);
+    on<LoginFormReset>(_onLoginFormReset);
   }
 
   final formKey = GlobalKey<FormState>();
@@ -32,7 +33,10 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
   }
   Future<void>_onPasswordChanged(PasswordChanged event, Emitter<LoginState> emit)async{
     emit(state.copyWidth(
-      password: BlocFormItem(value: event.password.value),
+      password: BlocFormItem(
+        value: event.password.value,
+        error: event.password.value.isNotEmpty && event.password.value.length >=6 ? null :'Ingrese el password'
+        ),
       formKey: formKey
     ));
   }
@@ -47,6 +51,9 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       formKey: formKey
     ));
 
+  }
+  Future<void>_onLoginFormReset(LoginFormReset event, Emitter<LoginState> emit)async{
+    state.formKey?.currentState?.reset();
   }
 
   

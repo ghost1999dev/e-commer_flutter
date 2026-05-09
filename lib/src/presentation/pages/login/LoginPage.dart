@@ -5,9 +5,9 @@ import 'package:untitled/src/domain/utils/Resource.dart';
 import 'package:untitled/src/presentation/pages/login/bloc/LoginBloc.dart';
 import 'package:untitled/src/presentation/pages/login/bloc/LoginEvent.dart';
 import 'package:untitled/src/presentation/pages/login/bloc/LoginState.dart';
+import 'package:untitled/src/presentation/pages/widgets/DefaultButton.dart';
+import 'package:untitled/src/presentation/pages/widgets/DefaultTextField.dart';
 import 'package:untitled/src/presentation/utils/BlocFormItem.dart';
-import 'package:untitled/src/presentation/widgets/DefaultButton.dart';
-import 'package:untitled/src/presentation/widgets/DefaultTextField.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -75,6 +75,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ));
                               },
                               obscureText: false,
+                              validator: (value){
+                                return state.email.error;
+                              },
                               isNumber: false),
                         ),
                         Container(
@@ -91,6 +94,9 @@ class _LoginPageState extends State<LoginPage> {
                                 ));
                               },
                               obscureText: true,
+                              validator: (value){
+                                return state.password.error;
+                              },
                               isNumber: false),
                         ),
                         Container(
@@ -100,7 +106,12 @@ class _LoginPageState extends State<LoginPage> {
                           height: 50,
                           child: ElevatedButton(
                             onPressed: () {
-                              _loginBloc?.add(LoginSubmit());
+                              if(state.formKey!.currentState!.validate()){
+                                _loginBloc?.add(LoginSubmit());
+                              }else{
+                                Fluttertoast.showToast(msg: "Formulario no valido");
+                              }
+                        
                             },
                             child: Text(
                               'LOG IN',
@@ -145,6 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       }
                       else if(responseState is Success){
+                        _loginBloc?.add(LoginFormReset());
                         Fluttertoast.showToast(
                           msg: 'Login exitoso',
                           toastLength: Toast.LENGTH_LONG

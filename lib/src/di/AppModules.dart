@@ -5,12 +5,15 @@ import 'package:injectable/injectable.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
 import 'package:untitled/src/domain/useCases/auth/RegisterUsesCases.dart';
+import 'package:untitled/src/presentation/pages/register/bloc/RegisterBloc.dart';
 @module
 abstract class AppModule{
   @injectable
   Authservice get authService => Authservice();
   @injectable
   AuthRepository get authRepository => AuthRepositoryImpl(authService);
+  @injectable
+  RegisterBloc get registerBloc => RegisterBloc(authUsesCases);
 
   @injectable
   AuthUsesCases get authUsesCases => AuthUsesCases(

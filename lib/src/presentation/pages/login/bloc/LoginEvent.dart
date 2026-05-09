@@ -10,6 +10,9 @@ abstract class LoginEvent extends Equatable{
 class InitEvent extends LoginEvent{
   const InitEvent();
 }
+class LoginFormReset extends LoginEvent{
+  LoginFormReset();
+}
 
 class EmailChanged extends LoginEvent{
   final BlocFormItem email;
