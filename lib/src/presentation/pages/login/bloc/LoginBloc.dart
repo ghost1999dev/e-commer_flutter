@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
+import 'package:untitled/src/domain/models/AuthResponse.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
@@ -48,6 +49,14 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       state.email.value,
       state.password.value
     );
+
+    if(authResponse is Success<AuthResponse>){
+      await authUsesCases.saveUserSessionUseCase.run(authResponse.data);
+      AuthResponse session = await authUsesCases.getUserSessionUseCase.run();
+      print("Session guardada: ${session.token}");
+      print("USER: ${session.createUserResponse.name}");
+      print('ROL: ${session.createUserResponse.roles[0].route}');
+    }
     emit(state.copyWidth(
       response: authResponse,
       formKey: formKey
