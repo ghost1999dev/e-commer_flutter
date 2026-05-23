@@ -1,4 +1,4 @@
-import 'package:untitled/src/data/dataSource/remote/repository/AuthRepositoryImpl.dart';
+import 'package:untitled/src/data/repository/AuthRepositoryImpl.dart';
 import 'package:untitled/src/domain/repository/AuthRepository.dart';
 
 class LoginAuthUseCase {

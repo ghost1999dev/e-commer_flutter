@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:untitled/src/data/dataSource/remote/service/AuthService.dart';
+import 'package:untitled/src/domain/models/AuthResponse.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
 import 'package:untitled/src/domain/utils/Resource.dart';
@@ -21,6 +22,10 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
   final formKey = GlobalKey<FormState>();
 
   Future<void> _onInitEvent(InitEvent event, Emitter<LoginState> emit)async{
+    AuthResponse session = await authUsesCases.getUserSessionCase.run();
+      print("Session guardada: ${session.token}");
+      print("User: ${session.createUserResponse.name}");
+      print("ROL: ${session.createUserResponse.roles[0].route}");
     emit(state.copyWidth(formKey: formKey));
   }
   Future<void> _onEmailChanged(EmailChanged event, Emitter<LoginState> emit)async{
@@ -48,6 +53,13 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       state.email.value,
       state.password.value
     );
+    if(authResponse is Success<AuthResponse>){
+      //una ves se loguee el usuario se guardara la data en session
+      await authUsesCases.saveUserSessionCase.run(authResponse.data);
+      
+
+    }
+
     emit(state.copyWidth(
       response: authResponse,
       formKey: formKey
