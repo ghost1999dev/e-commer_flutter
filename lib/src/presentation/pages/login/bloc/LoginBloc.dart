@@ -23,10 +23,13 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
 
   Future<void> _onInitEvent(InitEvent event, Emitter<LoginState> emit)async{
     AuthResponse session = await authUsesCases.getUserSessionCase.run();
-      print("Session guardada: ${session.token}");
-      print("User: ${session.createUserResponse.name}");
-      print("ROL: ${session.createUserResponse.roles[0].route}");
     emit(state.copyWidth(formKey: formKey));
+    if(session !=null){
+      emit(state.copyWidth(
+        response: Success(session),
+        formKey: formKey
+      ));
+    }
   }
   Future<void> _onEmailChanged(EmailChanged event, Emitter<LoginState> emit)async{
     emit(state.copyWidth(
@@ -56,18 +59,13 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
     if(authResponse is Success<AuthResponse>){
       //una ves se loguee el usuario se guardara la data en session
       await authUsesCases.saveUserSessionCase.run(authResponse.data);
-      
-
     }
-
     emit(state.copyWidth(
       response: authResponse,
       formKey: formKey
     ));
 
   }
-
-  
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();
   final _responseController = BehaviorSubject<Resource>();

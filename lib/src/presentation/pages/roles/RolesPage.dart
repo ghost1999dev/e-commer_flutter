@@ -1,0 +1,40 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled/src/presentation/pages/roles/RolesItem.dart';
+import 'package:untitled/src/presentation/pages/roles/bloc/RolesBloc.dart';
+import 'package:untitled/src/presentation/pages/roles/bloc/RolesState.dart';
+
+class RolesPage extends StatefulWidget {
+  const RolesPage({super.key});
+
+  @override
+  State<RolesPage> createState() => _RolesPageState();
+}
+
+class _RolesPageState extends State<RolesPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: BlocBuilder<RolesBloc,RolesState>(
+        builder: (context,state){
+          final roles = state.roles;
+          if(roles == null){
+            return const Center(child: CircularProgressIndicator());
+          }
+          return ListView(
+            shrinkWrap: true,
+            children: roles
+              .where((role)=>role !=null)
+              .map((role)=>GestureDetector(
+                onTap: (){
+                  print("Redirecting");
+                },
+                child: RolesItem(role: role!),
+              ))
+              .toList()
+          );
+        }
+      )
+    );
+  }
+}

@@ -5,6 +5,7 @@ import 'package:untitled/src/blocProviders.dart';
 import 'package:untitled/src/presentation/pages/login/LoginPage.dart';
 
 import 'package:untitled/src/presentation/pages/register/RgisterPage.dart';
+import 'package:untitled/src/presentation/pages/roles/RolesPage.dart';
 void main() async {
   await configureDependencies();
   runApp(const MyApp());
@@ -28,7 +29,8 @@ class MyApp extends StatelessWidget {
         initialRoute: 'login',
         routes: {
           'login':(BuildContext context)=>LoginPage(),
-          'register':(BuildContext context)=> RegisterPage()
+          'register':(BuildContext context)=> RegisterPage(),
+          'roles':(BuildContext context)=> RolesPage()
         },
 
       ),

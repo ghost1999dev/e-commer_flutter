@@ -160,6 +160,9 @@ class _LoginPageState extends State<LoginPage> {
                           msg: 'Login exitoso',
                           toastLength: Toast.LENGTH_LONG
                         );
+                        WidgetsBinding.instance.addPostFrameCallback((callback){
+                          Navigator.pushNamedAndRemoveUntil(context, 'roles', (route)=>false);
+                        });
                       }
 
                       return Container();
