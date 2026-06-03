@@ -26,9 +26,7 @@ class _RolesPageState extends State<RolesPage> {
             children: roles
               .where((role)=>role !=null)
               .map((role)=>GestureDetector(
-                onTap: (){
-                  print("Redirecting");
-                },
+                onTap: ()=> Navigator.pushNamed(context,role.route),
                 child: RolesItem(role: role!),
               ))
               .toList()

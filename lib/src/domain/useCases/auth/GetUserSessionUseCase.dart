@@ -5,6 +5,6 @@ class GetUserSessionCase {
 
   AuthRepository authRepository;
   GetUserSessionCase(this.authRepository);
-  Future<AuthResponse> run()=>authRepository.getUserSession();
+  Future<AuthResponse?> run()=>authRepository.getUserSession();
   
 }
