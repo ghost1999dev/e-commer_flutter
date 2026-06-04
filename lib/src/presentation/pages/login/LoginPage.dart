@@ -18,6 +18,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   LoginBloc? _loginBloc;
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      
+      _loginBloc= BlocProvider.of<LoginBloc>(context,listen:false);
+      _loginBloc?.add(InitEvent());
+    });
+  }
+  @override
   Widget build(BuildContext context) {
     _loginBloc = BlocProvider.of<LoginBloc>(context, listen: false);
     return Scaffold(

@@ -17,12 +17,13 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
     on<LoginSubmit>(_onLoginSubmit);
+    on<LoginReset>(_onLoginReset);
   }
 
   final formKey = GlobalKey<FormState>();
 
   Future<void> _onInitEvent(InitEvent event, Emitter<LoginState> emit)async{
-    AuthResponse session = await authUsesCases.getUserSessionCase.run();
+    AuthResponse? session = await authUsesCases.getUserSessionCase.run();
     emit(state.copyWidth(formKey: formKey));
     if(session !=null){
       emit(state.copyWidth(
@@ -65,6 +66,9 @@ class LoginBloc extends Bloc<LoginEvent,LoginState>{
       formKey: formKey
     ));
 
+  }
+  Future<void> _onLoginReset(LoginReset event,Emitter<LoginState>emit)async{
+    emit(LoginState(formKey: formKey));
   }
   final _emailController = BehaviorSubject<String>();
   final _passwordController = BehaviorSubject<String>();

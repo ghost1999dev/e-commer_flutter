@@ -26,8 +26,9 @@ class PasswordChanged extends LoginEvent{
   // TODO: implement props
   List<Object?> get props => [password];
 }
-
-
 class LoginSubmit extends LoginEvent{
   const LoginSubmit();
+}
+class LoginReset extends LoginEvent{
+  const LoginReset();
 }
