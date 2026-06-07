@@ -4,6 +4,8 @@ import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/RegisterUsesCases.dart';
 import 'package:untitled/src/presentation/pages/client/home/bloc/ClientHomeBloc.dart';
 import 'package:untitled/src/presentation/pages/client/home/bloc/ClientHomeEvent.dart';
+import 'package:untitled/src/presentation/pages/client/profile/bloc/ClientPofileBloc.dart';
+import 'package:untitled/src/presentation/pages/client/profile/bloc/ClientProfileEvent.dart';
 import 'package:untitled/src/presentation/pages/login/bloc/LoginBloc.dart';
 import 'package:untitled/src/presentation/pages/login/bloc/LoginEvent.dart';
 import 'package:untitled/src/presentation/pages/register/bloc/RegisterBloc.dart';
@@ -14,5 +16,8 @@ List<BlocProvider> blocProviders=[
   BlocProvider<LoginBloc>(create: (context)=>LoginBloc(locator<AuthUsesCases>())..add(InitEvent())),
   BlocProvider<RegisterBloc>(create: (context)=> RegisterBloc(locator<AuthUsesCases>())..add(RegisterInitEvent())),
   BlocProvider<RolesBloc>(create:(context)=> RolesBloc(locator<AuthUsesCases>())..add(GetRolesList())),
-  BlocProvider<ClientHomeBloc>(create: (context)=>ClientHomeBloc(locator<AuthUsesCases>())..add(ClientHomeInit()))
+  BlocProvider<ClientHomeBloc>(create: (context)=>ClientHomeBloc(locator<AuthUsesCases>())..add(ClientHomeInit())),
+  BlocProvider<ClientProfileBloc>(
+  create: (context) => ClientProfileBloc(locator<AuthUsesCases>())..add(const ClientProfileInit())
+)
 ];

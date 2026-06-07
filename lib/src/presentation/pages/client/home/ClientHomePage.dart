@@ -44,6 +44,14 @@ class _ClientHomePageState extends State<ClientHomePage> {
                   onTap: ()=> Navigator.pop(context),
                 ),
                 ListTile(
+                  leading: const Icon(Icons.person),
+                  title: const Text('Mi perfil'),
+                  onTap: (){
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, 'client/profile');
+                  },
+                ),
+                ListTile(
                   leading: Icon(Icons.logout),
                   title: Text('Cerrar sesion'),
                   onTap: ()async{
