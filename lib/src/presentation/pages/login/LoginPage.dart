@@ -22,8 +22,7 @@ class _LoginPageState extends State<LoginPage> {
     // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_){
-      
-      _loginBloc= BlocProvider.of<LoginBloc>(context,listen:false);
+      _loginBloc = BlocProvider.of<LoginBloc>(context,listen: false);
       _loginBloc?.add(InitEvent());
     });
   }

@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:untitled/src/domain/useCases/auth/AuthUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/GetUserSessionUseCase.dart';
 import 'package:untitled/src/domain/useCases/auth/LoginAuthUseCase.dart';
-import 'package:untitled/src/domain/useCases/auth/LogoutUseCase.dart';
+import 'package:untitled/src/domain/useCases/auth/LogoutUserSessionUseCase.dart';
 import 'package:untitled/src/domain/useCases/auth/RegisterUsesCases.dart';
 import 'package:untitled/src/domain/useCases/auth/SaveUserSessionCase.dart';
 import 'package:untitled/src/presentation/pages/register/bloc/RegisterBloc.dart';
@@ -18,7 +18,6 @@ abstract class AppModule{
   SharedPreference get sharedPref => SharedPreference();
   @injectable
   AuthRepository get authRepository => AuthRepositoryImpl(authService,sharedPref);
-
   @injectable
   RegisterBloc get registerBloc => RegisterBloc(authUsesCases);
 
@@ -28,6 +27,6 @@ abstract class AppModule{
     register: RegisterUsesCases(authRepository),
     saveUserSessionCase: SaveUserSessionCase(authRepository),
     getUserSessionCase: GetUserSessionCase(authRepository),
-    logoutUseCase: LogoutUseCase(authRepository)
+    logoutUserSessionUseCase: LogoutUserSessionUseCase(authRepository)
   );
 }

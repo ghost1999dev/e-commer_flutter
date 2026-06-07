@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:untitled/injection.dart';
 import 'package:untitled/src/blocProviders.dart';
+import 'package:untitled/src/presentation/pages/admin/home/AdminHomePage.dart';
 import 'package:untitled/src/presentation/pages/client/home/ClientHomePage.dart';
 import 'package:untitled/src/presentation/pages/login/LoginPage.dart';
 
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
           'login':(BuildContext context)=>LoginPage(),
           'register':(BuildContext context)=> RegisterPage(),
           'roles':(BuildContext context)=> RolesPage(),
-          'client/home':(BuildContext context)=>ClientHomePage()
+          'client/home':(BuildContext context)=> ClientHomePage(),
+          'admin/home':(BuildContext context)=> AdminHomePage()
         },
 
       ),

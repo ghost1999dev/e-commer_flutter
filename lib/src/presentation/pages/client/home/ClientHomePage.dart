@@ -17,7 +17,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Home")),
+      appBar: AppBar(title: const Text("Home")),
       drawer: BlocBuilder<ClientHomeBloc,ClientHomeState>(
         builder: (context,state){
           final user = state.authResponse?.createUserResponse;
@@ -26,13 +26,14 @@ class _ClientHomePageState extends State<ClientHomePage> {
               padding: EdgeInsets.zero,
               children: [
                 UserAccountsDrawerHeader(
-                  accountName: Text('${user?.name ?? ""} ${user?.lastName ?? ""}'), 
-                  accountEmail: Text(user?.email ?? ""),
+                  accountName: Text('${user?.name ?? ''} ${user?.lastName ?? ''}'), 
+                  accountEmail: Text(user?.email ?? ''),
                   currentAccountPicture: CircleAvatar(
                     backgroundImage: user?.image !=null
-                      ? NetworkImage(user!.image!)
-                      : null,
-                    child: user?.image == null
+                      ?NetworkImage(user!.image!)
+                      :null
+                    ,
+                    child: user?.image ==null
                       ? Icon(Icons.person)
                       :null,
                   ),
@@ -40,18 +41,16 @@ class _ClientHomePageState extends State<ClientHomePage> {
                 ListTile(
                   leading: Icon(Icons.home),
                   title: Text('Inicio'),
-                  onTap: ()=>Navigator.pop(context),
+                  onTap: ()=> Navigator.pop(context),
                 ),
                 ListTile(
                   leading: Icon(Icons.logout),
                   title: Text('Cerrar sesion'),
                   onTap: ()async{
-                    //Limpiamos nuestro estado de loginbloc
                     context.read<LoginBloc>().add(const LoginReset());
-                    //Primero borramos las sesion
                     context.read<ClientHomeBloc>().add(const Logout());
-                    Navigator.pushNamedAndRemoveUntil(context, 'login', (route)=>false);
-                  },
+                    Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
+                  }
                 )
               ],
             ),
@@ -59,7 +58,7 @@ class _ClientHomePageState extends State<ClientHomePage> {
         }
       ),
       body: Center(
-        child: Text("Client Home"),
+        child: Text("Home client"),
       ),
     );
   }

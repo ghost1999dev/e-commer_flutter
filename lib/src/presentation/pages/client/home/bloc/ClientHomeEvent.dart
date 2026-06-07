@@ -11,6 +11,6 @@ class ClientHomeInit extends ClientHomeEvent{
   const ClientHomeInit();
 }
 
-class Logout extends ClientHomeEvent {
+class Logout extends ClientHomeEvent{
   const Logout();
 }

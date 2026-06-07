@@ -14,5 +14,5 @@ List<BlocProvider> blocProviders=[
   BlocProvider<LoginBloc>(create: (context)=>LoginBloc(locator<AuthUsesCases>())..add(InitEvent())),
   BlocProvider<RegisterBloc>(create: (context)=> RegisterBloc(locator<AuthUsesCases>())..add(RegisterInitEvent())),
   BlocProvider<RolesBloc>(create:(context)=> RolesBloc(locator<AuthUsesCases>())..add(GetRolesList())),
-  BlocProvider<ClientHomeBloc>(create: (context)=> ClientHomeBloc(locator<AuthUsesCases>())..add(ClientHomeInit()))
+  BlocProvider<ClientHomeBloc>(create: (context)=>ClientHomeBloc(locator<AuthUsesCases>())..add(ClientHomeInit()))
 ];
