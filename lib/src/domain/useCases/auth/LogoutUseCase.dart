@@ -4,6 +4,6 @@ class LogoutUseCase {
   AuthRepository authRepository;
   LogoutUseCase(this.authRepository);
 
-  Future<void> run()=>authRepository.logout();
+  Future<void> run()=>authRepository.logoutUserSession();
   
 }
