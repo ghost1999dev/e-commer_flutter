@@ -4,6 +4,7 @@ import 'package:untitled/injection.dart';
 import 'package:untitled/src/blocProviders.dart';
 import 'package:untitled/src/presentation/pages/admin/home/AdminHomePage.dart';
 import 'package:untitled/src/presentation/pages/client/home/ClientHomePage.dart';
+import 'package:untitled/src/presentation/pages/client/profile/ClientProfilePage.dart';
 import 'package:untitled/src/presentation/pages/login/LoginPage.dart';
 
 import 'package:untitled/src/presentation/pages/register/RgisterPage.dart';
@@ -34,7 +35,8 @@ class MyApp extends StatelessWidget {
           'register':(BuildContext context)=> RegisterPage(),
           'roles':(BuildContext context)=> RolesPage(),
           'client/home':(BuildContext context)=> ClientHomePage(),
-          'admin/home':(BuildContext context)=> AdminHomePage()
+          'admin/home':(BuildContext context)=> AdminHomePage(),
+          'client/profile':(BuildContext context)=> ClientProfilePage()
         },
 
       ),
